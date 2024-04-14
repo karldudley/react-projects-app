@@ -8,7 +8,10 @@ export default function ProjectDetails({
   const [taskDescriptions, setTaskDescriptions] = useState(
     projects
       .filter((project) => project.id === selectedProjectId)[0]
-      .tasks.map((task) => ({ id: task.id, description: task.description }))
+      .tasks.map((task) => ({
+        id: task.id,
+        description: task.description,
+      }))
   );
 
   const handleDescriptionChange = (taskId, newDescription) => {
@@ -24,8 +27,6 @@ export default function ProjectDetails({
     );
     updateProjectTasks(updatedTasks);
   };
-
-  console.log(projects);
 
   return (
     <>
@@ -49,14 +50,13 @@ export default function ProjectDetails({
                         key={task.id}
                         className="p-2 bg-gray-100 mb-2 rounded shadow-sm"
                       >
-                        {task.name}
                         <input
                           type="text"
-                          value={taskDesc ? taskDesc.description : ''}
+                          value={task.description}
                           onChange={(e) =>
                             handleDescriptionChange(task.id, e.target.value)
                           }
-                          className="text-gray-500 text-sm"
+                          className="text-gray-500 text-sm w-full"
                         />
                       </li>
                     );

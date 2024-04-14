@@ -5,77 +5,7 @@ import ProjectDetails from './components/ProjectDetails';
 import AddProjectForm from './components/AddProjectForm';
 
 function App() {
-  const [projects, setProjects] = useState([
-    {
-      id: 0,
-      name: 'Project 1',
-      description: 'This is project 1',
-      due: '2021-12-31',
-      tasks: [
-        {
-          id: 1,
-          name: 'Task 1',
-          description: 'This is task 1',
-        },
-        {
-          id: 2,
-          name: 'Task 2',
-          description: 'This is task 2',
-        },
-        {
-          id: 3,
-          name: 'Task 3',
-          description: 'This is task 3',
-        },
-      ],
-    },
-    {
-      id: 1,
-      name: 'Project 2',
-      description: 'This is project 2',
-      due: '2021-12-31',
-      tasks: [
-        {
-          id: 1,
-          name: 'Task 1',
-          description: 'This is task 1',
-        },
-        {
-          id: 2,
-          name: 'Task 2',
-          description: 'This is task 2',
-        },
-        {
-          id: 3,
-          name: 'Task 3',
-          description: 'This is task 3',
-        },
-      ],
-    },
-    {
-      id: 2,
-      name: 'Project 3',
-      description: 'This is project 3',
-      due: '2021-12-31',
-      tasks: [
-        {
-          id: 1,
-          name: 'Task 1',
-          description: 'This is task 1',
-        },
-        {
-          id: 2,
-          name: 'Task 2',
-          description: 'This is task 2',
-        },
-        {
-          id: 3,
-          name: 'Task 3',
-          description: 'This is task 3',
-        },
-      ],
-    },
-  ]);
+  const [projects, setProjects] = useState([]);
 
   const [selectedProjectId, setSelectedProjectId] = useState(null);
 
@@ -87,6 +17,15 @@ function App() {
       return;
     }
     setSelectedProjectId(projectId);
+  };
+
+  const handleProjectDelete = (projectId) => {
+    if (projectId === selectedProjectId) {
+      setSelectedProjectId(null);
+    }
+    setProjects((prevProjects) =>
+      prevProjects.filter((project) => project.id !== projectId)
+    );
   };
 
   const handleAddProjectClick = () => {
@@ -117,6 +56,7 @@ function App() {
             <ProjectsSidebar
               projects={projects}
               onProjectSelect={handleProjectSelect}
+              onProjectDelete={handleProjectDelete}
               selectedProjectId={selectedProjectId}
             />
             <button
