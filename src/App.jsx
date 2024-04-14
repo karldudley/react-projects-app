@@ -98,16 +98,33 @@ function App() {
     dialog.current.close();
   };
 
+  const updateProjectTasks = (updatedTasks) => {
+    setProjects((prevProjects) =>
+      prevProjects.map((project) =>
+        project.id === selectedProjectId
+          ? { ...project, tasks: updatedTasks }
+          : project
+      )
+    );
+  };
+
   return (
     <>
       <h1 className="my-8 text-center text-5xl font-bold">Projects App</h1>
       <div className="container mx-auto flex flex-col md:flex-row">
         <div className="w-full md:w-1/4 p-4">
-          <div className="bg-gray-200 p-4">
+          <div className="bg-gray-200 p-4 flex flex-col">
             <ProjectsSidebar
               projects={projects}
               onProjectSelect={handleProjectSelect}
+              selectedProjectId={selectedProjectId}
             />
+            <button
+              onClick={handleAddProjectClick}
+              className=" bg-blue-500 hover:bg-blue-700 text-white py-1 rounded focus:outline-none focus:shadow-outline"
+            >
+              Add Project
+            </button>
           </div>
         </div>
         <div className="w-full md:w-3/4 p-4">
@@ -115,17 +132,12 @@ function App() {
             {selectedProjectId === null ? (
               <>
                 <NoProject />
-                <button
-                  onClick={handleAddProjectClick}
-                  className="ml-2 bg-blue-500 hover:bg-blue-700 text-white px-2 py-1 rounded focus:outline-none focus:shadow-outline"
-                >
-                  Add Project
-                </button>
               </>
             ) : (
               <ProjectDetails
                 projects={projects}
                 selectedProjectId={selectedProjectId}
+                updateProjectTasks={updateProjectTasks}
               />
             )}
           </div>
