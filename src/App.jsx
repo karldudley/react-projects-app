@@ -63,7 +63,7 @@ function App() {
               onClick={handleAddProjectClick}
               className=" bg-blue-500 hover:bg-blue-700 text-white py-1 rounded focus:outline-none focus:shadow-outline"
             >
-              Add Project
+              + Add Project
             </button>
           </div>
         </div>

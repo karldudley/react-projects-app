@@ -15,7 +15,7 @@ export default function ProjectsSidebar({
 
   return (
     <>
-      <h2 className="text-2xl font-bold mb-4">Projects</h2>
+      <h2 className="text-2xl font-bold mb-4 uppercase">Projects</h2>
       <ul>
         {projects.map((project) => (
           <li
